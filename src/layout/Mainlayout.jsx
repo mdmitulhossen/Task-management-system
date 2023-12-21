@@ -1,8 +1,11 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/header/Navbar";
 
 const Mainlayout = () => {
     return (
         <div>
-            Task mnagement platform comming soon
+                <Navbar />
+            <Outlet />
         </div>
     );
 };
