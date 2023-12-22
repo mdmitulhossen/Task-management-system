@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Mainlayout from "../layout/Mainlayout";
+import TodoLayout from "../layout/TodoLayout";
 
 
 const Route = createBrowserRouter([
@@ -22,6 +23,18 @@ const Route = createBrowserRouter([
             },
         ]
 
+    },
+    {
+        path: "/login",
+        element:<div>Login</div>
+    },
+    {
+        path: "/register",
+        element:<div>Register</div>
+    },
+    {
+        path:'/tms/:id',
+        element:<TodoLayout/>
     }
 ])
 

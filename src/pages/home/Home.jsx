@@ -4,7 +4,7 @@ import serviceicon1 from '../../assets/icons/service1.png'
 import serviceicon2 from '../../assets/icons/service2.png'
 import serviceicon3 from '../../assets/icons/service3.png'
 import TypePeopleUse from "./TypePeopleUse";
-import Footer from "./Footer";
+
 
 const Home = () => {
     return (
@@ -49,10 +49,7 @@ const Home = () => {
             <div>
                 <TypePeopleUse/>
             </div>
-            {/* using this website */}
-            <div>
-                <Footer/>
-            </div>
+            
         </div>
     );
 };
