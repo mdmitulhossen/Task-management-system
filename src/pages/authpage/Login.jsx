@@ -1,7 +1,11 @@
 import { useForm } from 'react-hook-form';
 import loginBg from '../../assets/home5.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
 const Login = () => {
+    const location = useLocation();
+    const { loading, signInWithEmailPassword, setLoading, googleSignIn, githubSignIn } = useAuth() || {};
     const navigate = useNavigate()
     const {
         register,
@@ -11,8 +15,35 @@ const Login = () => {
 
     // / handle add
     const handleLogin = (data) => {
-        console.log(data)
+        const { email, password } = data || {}
+        signInWithEmailPassword(email, password)
+            .then((result) => {        
+                        setLoading(false);
+                        navigate(location?.state ? location.state : "/");
+                        toast.success("Login successful");
+
+            })
+            .catch((err) => {
+                console.log(err)
+                setLoading(false);
+                toast.error(err.message);
+            });
     }
+
+     // google sign in
+     const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then((result) => {            
+                        setLoading(false);
+                        navigate(location?.state ? location.state : "/");
+                        toast.success("Login successful");
+            })
+            .catch((err) => {
+                setLoading(false);
+                toast.error(err.message);
+            });
+    };
+
     return (
         <div
             style={{
@@ -27,7 +58,7 @@ const Login = () => {
                 <p className="text-slate-500">Hi, Welcome back 👋</p>
 
                 <div className="my-5">
-                    <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                    <button onClick={handleGoogleSignIn} className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
                         <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-6 h-6" alt="" /> <span>Login with Google</span>
                     </button>
                 </div>
@@ -48,7 +79,7 @@ const Login = () => {
                             </svg>
                             <span>Login</span>
                         </button>
-                        <p className="text-center">Not registered yet? <a onClick={()=>navigate('/register')} className="text-indigo-600 font-medium inline-flex space-x-1 items-center cursor-pointer"><span>Register now </span><span><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <p className="text-center">Not registered yet? <a onClick={() => navigate('/register')} className="text-indigo-600 font-medium inline-flex space-x-1 items-center cursor-pointer"><span>Register now </span><span><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg></span></a></p>
                     </div>

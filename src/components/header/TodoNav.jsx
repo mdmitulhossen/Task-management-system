@@ -1,6 +1,8 @@
 import { useState } from 'react';
 // import logo from '../../assets/logo.png'
 import { Link, NavLink, useLocation } from "react-router-dom";
+import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
 // import useAuth from '../../hooks/useAuth';
 // import toast from 'react-hot-toast';
 const TodoNav = ({addShowModal}) => {
@@ -8,27 +10,18 @@ const TodoNav = ({addShowModal}) => {
     const [userOpen, setUserOpen] = useState(false)
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
 
-    //   const { user, logOut } = useAuth() || {};
+      const { user, logOut } = useAuth() || {};
 
-    // console.log(user)
 
 
     const handleLogOut = () => {
-        // logOut()
-        //   .then(result => toast.success('successfully Logout'))
-        //   .catch(err => toast.error(err))
-        // setUserOpen(false)
+        logOut()
+          .then(result => toast.success('successfully Logout'))
+          .catch(err => toast.error(err))
+        setUserOpen(false)
     }
 
-    const user = true
-    const menu = [
-        { path: '/', name: 'Home' },
-        { path: '/availableFoods', name: 'Available-Foods' },
-        { path: '/food/add', name: 'Add-Food' },
-        { path: '/myFoods/manage', name: 'Manage-My-Foods' },
-        { path: '/myFoods/request', name: 'My-Food-Request' },
-
-    ]
+  
     return (
         <div className={`${location.pathname === '/' ? 'absolute ' : 'bg-white'}  top-0 w-full z-50`}>
             <header className=" z-50 w-full bg-transparent  py-3 lg:py-0 dark:bg-gray-800 dark:border-gray-700">

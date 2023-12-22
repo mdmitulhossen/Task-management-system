@@ -4,6 +4,7 @@ import Mainlayout from "../layout/Mainlayout";
 import TodoLayout from "../layout/TodoLayout";
 import Login from "../pages/authpage/Login";
 import Register from "../pages/authpage/Register";
+import ProtectedRoute from "./ProtectedRoute";
 
 
 const Route = createBrowserRouter([
@@ -35,8 +36,8 @@ const Route = createBrowserRouter([
         element:<Register/>
     },
     {
-        path:'/tms/:id',
-        element:<TodoLayout/>
+        path:'/tms',
+        element:<ProtectedRoute><TodoLayout/></ProtectedRoute>
     }
 ])
 

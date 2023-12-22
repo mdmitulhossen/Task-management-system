@@ -1,8 +1,15 @@
 import { useForm } from 'react-hook-form';
 import loginBg from '../../assets/home5.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth'
+import toast from 'react-hot-toast';
+import axios from 'axios';
+
 const Register = () => {
     const navigate = useNavigate()
+    const location = useLocation();
+    const { signUpWithEmailPassword, updateUserProfile, loading, setLoading,
+    } = useAuth() || {};
     const {
         register,
         handleSubmit,
@@ -11,8 +18,36 @@ const Register = () => {
 
     // / handle add
     const handleRegister = (data) => {
-        console.log(data)
+        const { name, email, password, photoURL } = data || {}
+        // console.log(data)
+
+        if (password.length < 6) {
+            toast.error("Password must be at least 6 characters")
+            return
+        }
+        //create user
+        signUpWithEmailPassword(email, password)
+            .then((result) => {
+                updateUserProfile({ displayName: name, photoURL: photoURL })
+                    .then((r) => {
+                                setLoading(false);
+                                navigate(location?.state ? location.state : "/");
+                                toast.success("Registration successful");
+                            
+
+                    })
+                    .catch((err) => {
+                        setLoading(false);
+                        toast.error(err.message);
+                    });
+            })
+            .catch((err) => {
+                toast.error(err.message);
+                setLoading(false);
+            });
     }
+
+
     return (
         <div
             style={{
@@ -33,9 +68,9 @@ const Register = () => {
                             <p className="font-medium text-slate-700 pb-2">Name</p>
                             <input {...register("name")} id="name" name="name" type="text" className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="Enter Full Name" />
                         </label>
-                        <label htmlFor="photo">
+                        <label htmlFor="photoURL">
                             <p className="font-medium text-slate-700 pb-2">PhotoURL</p>
-                            <input {...register("PhotoURL")} id="PhotoURL" name="PhotoURL" type="text" className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="PhotoURL" />
+                            <input {...register("photoURL")} id="photoURL" name="photoURL" type="text" className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="PhotoURL" />
                         </label>
                         <label htmlFor="email">
                             <p className="font-medium text-slate-700 pb-2">Email address</p>
@@ -52,7 +87,7 @@ const Register = () => {
                             </svg>
                             <span>Register</span>
                         </button>
-                        <p className="text-center">Already Create account? <a onClick={()=>navigate('/login')} className="text-indigo-600 font-medium inline-flex space-x-1 items-center cursor-pointer"><span>login now </span><span><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <p className="text-center">Already Create account? <a onClick={() => navigate('/login')} className="text-indigo-600 font-medium inline-flex space-x-1 items-center cursor-pointer"><span>login now </span><span><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg></span></a></p>
                     </div>
