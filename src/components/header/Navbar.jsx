@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Container from "../shared/Container";
 
 const navMenu = [
@@ -17,6 +17,7 @@ const navMenu = [
 ]
 
 const Navbar = () => {
+    const navigate = useNavigate()
     return (
         <div className="absolute w-full top-0 z-10 taskContainer left-1/2 -translate-x-1/2">
             <div className="navbar bg-transparent">
@@ -57,7 +58,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className=" bg-[#525FFB] text-white px-3 py-1 rounded cursor-pointer">Try It</a>
+                    <a onClick={()=>navigate('/login')} className=" bg-[#525FFB] text-white px-3 py-1 rounded cursor-pointer">Try It</a>
                 </div>
             </div>
         </div>

@@ -2,8 +2,10 @@ import bgImage from '../../assets/heroBg.jpg'
 import heroImage from '../../assets/hero.png'
 import Lottie from 'lottie-react';
 import todoAnimation from '../../assets/animation/todo.json'
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+    const navigate = useNavigate()
     return (
         <div
             style={{
@@ -18,7 +20,7 @@ const Hero = () => {
                 <div className='space-y-4 w-full md:flex-1 pt-28 md:pt-0 flex  flex-col justify-center items-center md:items-start'>
                     <p className='text-[#1E1C24] text-[32px] md:text-[36px] lg:text-[44px] xl:text-[55px] font-bold text-center md:text-left'>Task management <br /> and lists Tool</p>
                     <p className='text-[#b1aaaa] md:text-[16px] lg:text-[20px] text-center md:text-left'>We believe that designing products and services in close partnership with our clients is the only way to have a real impact on their business.</p>
-                    <button className='px-5 py-3 font-bold text-sm rounded bg-[#525FFB] text-white hover:bg-[#313ba3] duration-200 '>Let’s Explore</button>
+                    <button onClick={()=>navigate('/login')} className='px-5 py-3 font-bold text-sm rounded bg-[#525FFB] text-white hover:bg-[#313ba3] duration-200 '>Let’s Explore</button>
                 </div>
                 <div className='w-full md:flex-1 relative' >
                     <div className='absolute top-0 right-1/2 translate-x-1/2'>

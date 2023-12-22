@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 
 const Mainlayout = () => {
     const { user, logOut } = useAuth() || {};
-    if (user) {
+    if (user?.email) {
         return <Navigate to="/tms" replace />
     }
 
