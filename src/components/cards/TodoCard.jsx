@@ -1,8 +1,18 @@
+import { useDrag } from "react-dnd";
 
 const TodoCard = () => {
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: "task",
+        item: { id: 1 },
+        collect: (monitor) => ({
+          isDragging: !!monitor.isDragging()
+        })
+      }))
+
+      console.log(isDragging)
     return (
 
-        <div className='w-full bg-white p-3 rounded shadow space-y-2'>
+        <div ref={drag} className={`w-full ${isDragging?"opacity-50":"opacity-100"} bg-white p-3 rounded shadow space-y-2 cursor-grabbing`}>
             <div className="flex justify-between">
                 <div>
                     <p className='bg-[#FF3D00] text-white rounded-full text-xs font-semibold px-4 '>HIGH</p>

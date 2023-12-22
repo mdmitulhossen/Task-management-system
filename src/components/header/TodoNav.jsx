@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, NavLink, useLocation } from "react-router-dom";
 // import useAuth from '../../hooks/useAuth';
 // import toast from 'react-hot-toast';
-const TodoNav = () => {
+const TodoNav = ({addShowModal}) => {
     const location = useLocation()
     const [userOpen, setUserOpen] = useState(false)
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
@@ -96,7 +96,7 @@ const TodoNav = () => {
 
                             </div>
                             {/* Add New */}
-                            <button className='bg-[#525FFB] px-3 py-2 rounded flex gap-2 items-center text-sm text-white font-bold'>
+                            <button onClick={()=>addShowModal?.setAddFormShow(true)} className='bg-[#525FFB] px-3 py-2 rounded flex gap-2 items-center text-sm text-white font-bold'>
                                 <span><i className='bx bx-plus-medical' ></i></span>
                                 <p>
                                     Add New
