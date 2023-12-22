@@ -1,8 +1,9 @@
 import Hero from "./Hero";
-import homeBg1 from '../../assets/home1.png'
+import homeBg1 from '../../assets/home4.jpg'
 import serviceicon1 from '../../assets/icons/service1.png'
 import serviceicon2 from '../../assets/icons/service2.png'
 import serviceicon3 from '../../assets/icons/service3.png'
+import TypePeopleUse from "./TypePeopleUse";
 
 const Home = () => {
     return (
@@ -41,6 +42,11 @@ const Home = () => {
                         <p className="text-white/60 text-center">Save time, avoid losing work and information, delegate, and track tasks to stay on schedule</p>
                     </div>
                 </div>
+            </div>
+
+            {/* using this website */}
+            <div>
+                <TypePeopleUse/>
             </div>
         </div>
     );
