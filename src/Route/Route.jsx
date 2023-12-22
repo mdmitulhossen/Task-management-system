@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Mainlayout from "../layout/Mainlayout";
 import TodoLayout from "../layout/TodoLayout";
+import Login from "../pages/authpage/Login";
+import Register from "../pages/authpage/Register";
 
 
 const Route = createBrowserRouter([
@@ -26,11 +28,11 @@ const Route = createBrowserRouter([
     },
     {
         path: "/login",
-        element:<div>Login</div>
+        element:<Login/>
     },
     {
         path: "/register",
-        element:<div>Register</div>
+        element:<Register/>
     },
     {
         path:'/tms/:id',
